@@ -1,0 +1,137 @@
+[gd_scene load_steps=9 format=3 uid="uid://c82aivjcwvo17"]
+
+[ext_resource type="Script" uid="uid://cxc1g2h6gwd3e" path="res://UI/menu.gd" id="1_menu"]
+[ext_resource type="Texture2D" uid="uid://dgg3v47o67m4m" path="res://Asset/a1bdfe19-df6b-4474-a0e3-01da0b3f0f50.jpg" id="2_bg"]
+[ext_resource type="Texture2D" uid="uid://drr6vylg8jqry" path="res://Asset/v1.1 dungeon crawler 16X16 pixel pack/ui (new)/menu_button.png" id="3_menu_btn"]
+[ext_resource type="FontFile" uid="uid://ue5vu1txi80k" path="res://Asset/Pixelcraft - Personal Use.ttf" id="4_font"]
+[ext_resource type="Texture2D" uid="uid://b40xuu3lbp7gu" path="res://Asset/v1.1 dungeon crawler 16X16 pixel pack/ui (new)/menu_button_press.png" id="5_menu_press"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_e05sn"]
+font = ExtResource("4_font")
+
+[sub_resource type="LabelSettings" id="LabelSettings_kfjwn"]
+font = ExtResource("4_font")
+font_size = 12
+
+[sub_resource type="LabelSettings" id="LabelSettings_dte3n"]
+font = ExtResource("4_font")
+font_size = 12
+
+[sub_resource type="LabelSettings" id="LabelSettings_dhncy"]
+font = ExtResource("4_font")
+font_size = 12
+
+[node name="Menu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_menu")
+
+[node name="Background" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_bg")
+expand_mode = 1
+stretch_mode = 6
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -50.0
+offset_top = -80.0
+offset_right = 50.0
+offset_bottom = 80.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 20
+
+[node name="TitleLabel" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
+theme_override_font_sizes/font_size = 32
+text = "ROGUELIKE"
+label_settings = SubResource("LabelSettings_e05sn")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="StartButton" type="TextureButton" parent="VBoxContainer"]
+layout_mode = 2
+texture_normal = ExtResource("3_menu_btn")
+texture_pressed = ExtResource("5_menu_press")
+stretch_mode = 5
+
+[node name="StartLabel" type="Label" parent="VBoxContainer/StartButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 1
+theme_override_constants/shadow_offset_y = 1
+text = "START GAME"
+label_settings = SubResource("LabelSettings_kfjwn")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="OptionsButton" type="TextureButton" parent="VBoxContainer"]
+layout_mode = 2
+texture_normal = ExtResource("3_menu_btn")
+texture_pressed = ExtResource("5_menu_press")
+stretch_mode = 5
+
+[node name="OptionsLabel" type="Label" parent="VBoxContainer/OptionsButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 1
+theme_override_constants/shadow_offset_y = 1
+text = "OPTIONS"
+label_settings = SubResource("LabelSettings_dte3n")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="QuitButton" type="TextureButton" parent="VBoxContainer"]
+layout_mode = 2
+texture_normal = ExtResource("3_menu_btn")
+texture_pressed = ExtResource("5_menu_press")
+stretch_mode = 5
+
+[node name="QuitLabel" type="Label" parent="VBoxContainer/QuitButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 1.0
+offset_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 1
+theme_override_constants/shadow_offset_y = 1
+text = "QUIT"
+label_settings = SubResource("LabelSettings_dhncy")
+horizontal_alignment = 1
+vertical_alignment = 1

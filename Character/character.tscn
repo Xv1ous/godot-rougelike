@@ -1,0 +1,27 @@
+[gd_scene load_steps=6 format=3 uid="uid://cetsainc22urt"]
+
+[ext_resource type="Script" uid="uid://cw3vdimfcjq1o" path="res://Character/character.gd" id="1_k3002"]
+[ext_resource type="Script" uid="uid://b2utvsfh6clui" path="res://Character/States/state_machine.gd" id="2_state_machine"]
+[ext_resource type="Script" uid="uid://drw66tqjf1ui1" path="res://Character/States/idle.gd" id="4_idle"]
+[ext_resource type="Script" uid="uid://wvya1xgcqfgx" path="res://Character/States/walk.gd" id="5_walk"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_twwou"]
+
+[node name="Character" type="CharacterBody2D"]
+script = ExtResource("1_k3002")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_twwou")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+
+[node name="StateMachine" type="Node" parent="."]
+script = ExtResource("2_state_machine")
+
+[node name="Idle" type="Node" parent="StateMachine"]
+script = ExtResource("4_idle")
+
+[node name="Walk" type="Node" parent="StateMachine"]
+script = ExtResource("5_walk")
