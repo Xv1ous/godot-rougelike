@@ -117,8 +117,7 @@ Rooms are connected with procedurally generated corridors that ensure proper nav
 ## Assets
 
 This project uses assets from:
-- "v1.1 dungeon crawler 16X16 pixel pack" - Dungeon tiles and sprites
-- Custom pixel art assets
+- **[Simple Dungeon Crawler 16x16 Pixel Pack](https://o-lobster.itch.io/simple-dungeon-crawler-16x16-pixel-pack)** by o-lobster - Dungeon tiles, sprites, and game assets
 
 ## License
 
