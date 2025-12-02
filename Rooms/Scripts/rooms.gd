@@ -7,7 +7,7 @@ const SPAWN_ROOMS: Array = [
 ]
 const INTERMEDIATE_ROOMS: Array = [preload("res://Rooms/Scenes/Room.tscn")]
 const SPECIAL_ROOMS: Array = [preload("res://Rooms/Scenes/Room.tscn")] # Add your special room scenes here
-const END_ROOMS: Array = [preload("res://Rooms/Scenes/Room.tscn")]
+const END_ROOMS: Array = [preload("res://Rooms/Scenes/end_room.tscn")]
 
 # If you have a boss room scene, add it here
 # const SLIME_BOSS_SCENE: PackedScene = preload("res://Rooms/SlimeBossRoom.tscn")
@@ -22,7 +22,7 @@ const LEFT_WALL_TILE := Vector2i(4, 5)
 
 # ---------- VARIABLES ----------
 # Simple SavedData alternative - you can replace this with your actual SavedData
-var num_floor: int = 1
+var num_floor: int = 2
 
 # ---------- NODE REFERENCES ----------
 @onready var player: CharacterBody2D = get_tree().get_first_node_in_group("player") as CharacterBody2D
@@ -144,10 +144,10 @@ func _position_new_room(room: Node2D, previous_room_door: Node2D, corridor_heigh
 		# Calculate room position - align entrance with corridor
 		# Position room so entrance aligns with the corridor exit
 		var corridor_exit_world = previous_room_door.global_position + Vector2.UP * (corridor_height + 1) * TILE_SIZE
-		room.position = corridor_exit_world - entrance_local_pos
+		room.position = corridor_exit_world - entrance_local_pos + Vector2.LEFT * TILE_SIZE * 0.5
 	else:
 		# Fallback positioning
-		room.position = previous_room_door.global_position + Vector2.UP * used_rect.size.y * TILE_SIZE + Vector2.UP * (1 + corridor_height) * TILE_SIZE
+		room.position = previous_room_door.global_position + Vector2.UP * used_rect.size.y * TILE_SIZE + Vector2.UP * (1 + corridor_height) * TILE_SIZE + Vector2.LEFT * TILE_SIZE * 0.5
 
 # ---------- ENTRANCE MANAGEMENT ----------
 func _clear_entrance_walls(room: Node2D, room_index: int, previous_room: Node2D) -> void:

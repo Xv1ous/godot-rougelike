@@ -1,0 +1,166 @@
+[gd_scene load_steps=5 format=4 uid="uid://cse688h0o823w"]
+
+[ext_resource type="PackedScene" uid="uid://bp06ptfrf8kq5" path="res://Rooms/Scenes/Room.tscn" id="1_l62t1"]
+[ext_resource type="Texture2D" uid="uid://duf1ej0bpwsjq" path="res://Asset/v1.1 dungeon crawler 16X16 pixel pack/full tilemap.png" id="2_pi1ne"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_isqbk"]
+texture = ExtResource("2_pi1ne")
+0:0/0 = 0
+1:0/0 = 0
+1:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+2:0/0 = 0
+2:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+3:0/0 = 0
+4:0/0 = 0
+5:0/0 = 0
+6:0/0 = 0
+7:0/0 = 0
+8:0/0 = 0
+0:1/0 = 0
+0:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+1:1/0 = 0
+1:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+2:1/next_alternative_id = 4
+2:1/0 = 0
+3:1/next_alternative_id = 3
+3:1/0 = 0
+4:1/0 = 0
+5:1/0 = 0
+5:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+6:1/next_alternative_id = 3
+6:1/0 = 0
+7:1/next_alternative_id = 3
+7:1/0 = 0
+8:1/next_alternative_id = 3
+8:1/0 = 0
+0:2/0 = 0
+1:2/0 = 0
+2:2/next_alternative_id = 3
+2:2/0 = 0
+3:2/next_alternative_id = 3
+3:2/0 = 0
+4:2/next_alternative_id = 3
+4:2/0 = 0
+5:2/next_alternative_id = 3
+5:2/0 = 0
+6:2/next_alternative_id = 3
+6:2/0 = 0
+8:2/next_alternative_id = 3
+8:2/0 = 0
+0:3/0 = 0
+1:3/0 = 0
+2:3/next_alternative_id = 3
+2:3/0 = 0
+3:3/next_alternative_id = 3
+3:3/0 = 0
+4:3/next_alternative_id = 3
+4:3/0 = 0
+5:3/next_alternative_id = 3
+5:3/0 = 0
+6:3/next_alternative_id = 3
+6:3/0 = 0
+8:3/next_alternative_id = 3
+8:3/0 = 0
+3:4/0 = 0
+3:4/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+4:4/0 = 0
+4:4/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+6:4/0 = 0
+6:4/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+7:4/0 = 0
+7:4/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+8:4/0 = 0
+8:4/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+3:5/next_alternative_id = 4
+3:5/0 = 0
+3:5/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+4:5/0 = 0
+4:5/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+6:5/0 = 0
+6:5/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+7:5/0 = 0
+7:5/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+8:5/0 = 0
+8:5/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+1:6/0 = 0
+1:6/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+2:6/0 = 0
+2:6/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+3:6/0 = 0
+3:6/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+4:6/0 = 0
+4:6/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+5:6/0 = 0
+5:6/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+7:6/0 = 0
+7:6/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+8:6/0 = 0
+8:6/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+1:7/0 = 0
+1:7/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+2:7/0 = 0
+2:7/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+5:7/0 = 0
+5:7/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+3:7/0 = 0
+0:4/0 = 0
+0:5/0 = 0
+1:5/0 = 0
+2:5/0 = 0
+6:6/0 = 0
+5:4/0 = 0
+2:4/0 = 0
+1:4/0 = 0
+5:5/0 = 0
+8:7/0 = 0
+7:7/0 = 0
+6:7/0 = 0
+4:7/0 = 0
+0:6/0 = 0
+0:7/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_75etq"]
+resource_local_to_scene = true
+physics_layer_0/collision_layer = 1
+navigation_layer_0/layers = 1
+sources/2 = SubResource("TileSetAtlasSource_isqbk")
+
+[node name="EndRoom" instance=ExtResource("1_l62t1")]
+
+[node name="Wall" parent="NavigationRegion2D" index="0"]
+tile_map_data = PackedByteArray("AAAKAAAAAgADAAQAAAAJAAAAAgABAAcAAAAIAAAAAgAHAAUAAAAHAAAAAgAIAAQAAAADAAEAAgAFAAcAAAAKAAEAAgABAAcAAAAEAAAAAgAFAAcAAAADAAAAAgAEAAQAAAAEAAQAAgACAAcAAAAFAAQAAgACAAcAAAAJAAQAAgACAAcAAAAIAAQAAgACAAcAAAAKAAQAAgAFAAcAAAADAAQAAgABAAcAAAAKAAMAAgAEAAUAAAAKAAIAAgAEAAUAAAADAAMAAgADAAUAAAADAAIAAgADAAUAAAAFAAAAAgAGAAUAAAAGAAAAAgAHAAQAAAAEAP//AgAEAAQAAAAJAP//AgADAAQAAAAFAP//AgACAAcAAAAGAP//AgACAAcAAAAHAP//AgACAAcAAAAIAP//AgACAAcAAAA=")
+tile_set = SubResource("TileSet_75etq")
+
+[node name="Ground" parent="NavigationRegion2D" index="1"]
+tile_map_data = PackedByteArray("AAADAAIAAgACAAMAAAADAAMAAgADAAEAAAADAAQAAgACAAIAAAAEAAIAAgACAAMAAAAEAAMAAgADAAEAAAAEAAQAAgACAAMAAAAFAAIAAgACAAEAAAAFAAMAAgACAAIAAAAFAAQAAgADAAIAAAAGAAIAAgACAAEAAAAGAAMAAgACAAEAAAAGAAQAAgACAAEAAAAHAAIAAgADAAIAAAAHAAMAAgACAAMAAAAHAAQAAgADAAEAAAAIAAIAAgADAAIAAAAIAAMAAgADAAIAAAAIAAQAAgACAAEAAAAJAAIAAgACAAMAAAAJAAMAAgACAAEAAAAJAAQAAgADAAMAAAAKAAIAAgACAAMAAAAKAAMAAgADAAIAAAAKAAQAAgADAAEAAAAFAAEAAgACAAEAAAAGAAEAAgADAAMAAAAEAAEAAgACAAIAAAAHAAEAAgADAAMAAAAIAAEAAgADAAIAAAAJAAEAAgACAAEAAAA=")
+tile_set = SubResource("TileSet_75etq")
+
+[node name="Decoration" parent="NavigationRegion2D" index="2"]
+tile_map_data = PackedByteArray("AAAGAAEAAgABAAMAAAAFAAEAAgAFAAEAAAAFAAAAAgADAAAAAAAIAAAAAgADAAAAAAA=")
+tile_set = SubResource("TileSet_75etq")
+
+[node name="Marker2D" parent="Entrance" index="0"]
+position = Vector2(104, 71)
+
+[node name="Marker2D2" parent="Entrance" index="1"]
+position = Vector2(120, 71)
+
+[node name="Door" parent="." index="2"]
+visible = false
+
+[node name="Door" parent="Door" index="0"]
+position = Vector2(261, 67)
+
+[node name="Marker2D" parent="EnemiesPosition" index="0"]
+position = Vector2(61, 53)
+
+[node name="Marker2D2" parent="EnemiesPosition" index="1"]
+position = Vector2(158, 50)
+
+[node name="Marker2D3" parent="EnemiesPosition" index="2"]
+position = Vector2(163, 67)
+
+[node name="CollisionShape2D" parent="PlayerDetector" index="0"]
+position = Vector2(104.25, 24)
+
+[editable path="Door/Door"]

@@ -1,7 +1,7 @@
-[gd_scene load_steps=26 format=3 uid="uid://dq7dmyu4qsu6j"]
+[gd_scene load_steps=26 format=3 uid="uid://c2t3kyg1f30io"]
 
-[ext_resource type="PackedScene" path="res://Character/Scenes/character.tscn" id="1_character"]
-[ext_resource type="Script" path="res://Character/Scripts/player.gd" id="2_player"]
+[ext_resource type="PackedScene" uid="uid://cetsainc22urt" path="res://Character/Scenes/character.tscn" id="1_character"]
+[ext_resource type="Script" uid="uid://cy7wx7837bksw" path="res://Character/Scripts/player.gd" id="2_player"]
 [ext_resource type="Texture2D" uid="uid://d4ei4t7j4bhlb" path="res://Asset/v1.1 dungeon crawler 16X16 pixel pack/heroes/knight/knight_idle_spritesheet.png" id="3_fn4pq"]
 [ext_resource type="Texture2D" uid="uid://c3tiq57c81ws3" path="res://Asset/v1.1 dungeon crawler 16X16 pixel pack/heroes/knight/knight_run_spritesheet.png" id="4_raa3c"]
 [ext_resource type="Texture2D" uid="uid://bcfbfkuj42sc7" path="res://Asset/v1.1 dungeon crawler 16X16 pixel pack/heroes/knight/weapon_sword_1.png" id="5_raa3c"]
