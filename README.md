@@ -4,10 +4,10 @@ A roguelike dungeon crawler game built with Godot 4.5. Features procedurally gen
 
 ## Features
 
-- **Procedural Dungeon Generation**: Dynamically generated dungeons with connected rooms and hallways
+- **Procedural Dungeon Generation**: Dynamically generated dungeons with connected rooms
 - **Room System**: Multiple room types including spawn rooms, intermediate rooms, special rooms, and end rooms
-- **Hallway Connections**: Rooms are connected with procedurally generated hallways/corridors
 - **Enemy Combat**: Fight against various enemies (slimes, goblins, flying creatures)
+- **Knockback System**: Dynamic knockback mechanics for both player and enemies when taking damage
 - **State Machine**: Character movement and combat using a state machine pattern
 - **Navigation System**: Automatic navigation mesh generation for AI pathfinding
 
@@ -32,7 +32,7 @@ cd godot-rougelike
 ## Running the Game
 
 1. Open the project in Godot
-2. Set the main scene to `res://UI/menu.tscn` (already configured)
+2. Set the main scene to `res://UI/Scenes/menu.tscn` (already configured)
 3. Press F5 or click the "Play" button to run the game
 
 ## Project Structure
@@ -41,47 +41,89 @@ cd godot-rougelike
 Rougelike godot4/
 ├── Asset/                          # Game assets (sprites, tilesets, fonts)
 │   └── v1.1 dungeon crawler 16X16 pixel pack/
-├── Character/                     # Player and enemy characters
-│   ├── player.gd                  # Player controller
-│   ├── character.gd               # Base character class
-│   ├── Enemies/                   # Enemy types (slime, goblin, flying creature)
-│   └── States/                    # State machine for character behavior
-├── Rooms/                         # Dungeon generation and room management
-│   ├── rooms.gd                   # Main room generation script
-│   ├── room.gd                    # Base room class
-│   ├── Spawn_room.gd              # Spawn room implementation
-│   ├── hallway.gd                 # Hallway/corridor generation
-│   ├── dungeon_generator.gd      # Alternative dungeon generator
-│   └── door.gd                    # Door mechanics
-├── UI/                            # User interface
-│   ├── menu.gd                    # Main menu
-│   ├── ui.gd                      # Game UI
-│   └── health_display.gd          # Health bar display
-├── game.gd                        # Main game script
-└── project.godot                  # Godot project configuration
+├── Character/                      # Player and enemy characters
+│   ├── Scenes/                     # Character scene files
+│   │   ├── character.tscn          # Base character scene
+│   │   ├── player.tscn             # Player scene
+│   │   └── Enemies/                # Enemy scenes
+│   │       ├── enemy.tscn
+│   │       ├── goblin.tscn
+│   │       ├── slime.tscn
+│   │       ├── flying_creature.tscn
+│   │       └── projectile.tscn
+│   └── Scripts/                    # Character scripts
+│       ├── character.gd            # Base character class
+│       ├── player.gd               # Player controller
+│       └── Enemies/                # Enemy scripts
+│           ├── enemy.gd
+│           ├── goblin.gd
+│           ├── slime.gd
+│           ├── flying_creature.gd
+│           └── projectile.gd
+│       └── States/                 # State machine for character behavior
+│           ├── state_machine.gd
+│           ├── state.gd
+│           ├── idle.gd
+│           └── walk.gd
+├── Rooms/                          # Dungeon generation and room management
+│   ├── Scenes/                     # Room scene files
+│   │   ├── Room.tscn               # Base room scene
+│   │   ├── Door.tscn               # Door scene
+│   │   ├── Spawn_Room_A.tscn       # Spawn room variant A
+│   │   └── Spawn_Room_B.tscn       # Spawn room variant B
+│   └── Scripts/                    # Room scripts
+│       ├── rooms.gd                # Main room generation script
+│       ├── room.gd                 # Base room class
+│       ├── Spawn_room.gd           # Spawn room implementation
+│       └── door.gd                 # Door mechanics
+├── UI/                             # User interface
+│   ├── Scenes/                     # UI scene files
+│   │   ├── menu.tscn               # Main menu scene
+│   │   └── ui.tscn                 # Game UI scene
+│   └── Scripts/                    # UI scripts
+│       ├── menu.gd                 # Main menu script
+│       ├── ui.gd                   # Game UI script
+│       └── health_display.gd       # Health bar display
+├── Scenes/                         # Main game scenes
+│   └── game.tscn                   # Main game scene
+├── Scripts/                        # Main game scripts
+│   └── game.gd                     # Main game script
+└── project.godot                   # Godot project configuration
 ```
 
 ## Key Scripts
 
-### Room Generation (`Rooms/rooms.gd`)
+### Room Generation (`Rooms/Scripts/rooms.gd`)
 - Generates procedural dungeons with multiple room types
-- Creates hallways/corridors between connected rooms
 - Manages room placement and connections
+- Handles room instantiation and navigation setup
 
-### Room System (`Rooms/room.gd`)
+### Room System (`Rooms/Scripts/room.gd`)
 - Base room class with enemy spawning
 - Entrance/exit management
 - Door control system
 
-### Hallway System (`Rooms/hallway.gd`)
-- Generates horizontal and vertical hallways
-- Creates navigation meshes for pathfinding
-- Connects rooms seamlessly
+### Character System (`Character/Scripts/character.gd`)
+- Base character class with movement and knockback mechanics
+- Shared properties for all characters (player and enemies)
+- State machine integration
+
+### Player Controller (`Character/Scripts/player.gd`)
+- Player movement and input handling
+- Combat system with sword attacks
+- Health and invincibility system
+- Knockback when hit by enemies
+
+### Enemy System (`Character/Scripts/Enemies/enemy.gd`)
+- Base enemy class with navigation support
+- Health and invincibility system
+- Knockback when hit by player
 
 ## Controls
 
 - **Arrow Keys / WASD**: Move character
 - **Mouse Click**: Attack
+- **Charge Attack**: Hold mouse button for a more powerful attack
 
 ## Room Types
 
@@ -94,25 +136,37 @@ Rougelike godot4/
 
 The dungeon generator creates:
 - A spawn room at the start
-- Multiple intermediate rooms connected by hallways
+- Multiple intermediate rooms
 - Special rooms randomly placed
 - An end room at the final level
 
-Rooms are connected with procedurally generated corridors that ensure proper navigation between rooms.
+Rooms are procedurally generated with proper navigation meshes for enemy pathfinding.
+
+## Combat System
+
+- **Player Attacks**: Click to perform basic attacks, hold for charge attacks
+- **Knockback**: Both player and enemies are knocked back when taking damage
+- **Invincibility Frames**: Brief invincibility after taking damage with visual feedback
+- **Enemy AI**: Enemies use navigation system to chase the player
 
 ## Development
 
 ### Testing
-- Use `Rooms/dungeon_generator_test.tscn` to test dungeon generation
-- Adjust parameters in the test scene to see different dungeon layouts
+- Run the game from the main menu to test dungeon generation
+- Adjust parameters in `Rooms/Scripts/rooms.gd` to see different dungeon layouts
 
 ### Adding New Rooms
-1. Create a new room scene in the `Rooms/` folder
-2. Add it to the appropriate array in `rooms.gd`:
+1. Create a new room scene in the `Rooms/Scenes/` folder
+2. Add it to the appropriate array in `Rooms/Scripts/rooms.gd`:
    - `SPAWN_ROOMS` for spawn rooms
    - `INTERMEDIATE_ROOMS` for regular rooms
    - `SPECIAL_ROOMS` for special rooms
    - `END_ROOMS` for end rooms
+
+### Adding New Enemies
+1. Create a new enemy scene in `Character/Scenes/Enemies/`
+2. Create a new enemy script in `Character/Scripts/Enemies/` that extends `Enemy`
+3. Add the enemy scene to the `ENEMY_SCENES` array in `Rooms/Scripts/room.gd`
 
 ## Assets
 
@@ -136,4 +190,3 @@ Xv1ous
 - **Tutorial Series**: [Godot Roguelike Tutorial](https://www.youtube.com/watch?v=axMNUTmFEDA&list=PL2-ArCpIQtjELkyLKec8BaVVCeunuHSK9) - Followed for dungeon generation and game structure
 - Godot Engine community
 - Pixel art asset creators
-
