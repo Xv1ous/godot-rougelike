@@ -1,0 +1,82 @@
+[gd_scene load_steps=11 format=3 uid="uid://chg7fmrs54q61"]
+
+[ext_resource type="PackedScene" uid="uid://b8x7k2nan4p5q" path="res://Character/Scenes/Enemies/enemy.tscn" id="1_enemy"]
+[ext_resource type="Script" uid="uid://cdg245xnewmfq" path="res://Character/Scripts/Enemies/flying_creature.gd" id="2_flying"]
+[ext_resource type="Texture2D" uid="uid://c247yc8bmes7c" path="res://Asset/v1.1 dungeon crawler 16X16 pixel pack/enemies/flying creature/fly_anim_spritesheet.png" id="3_fly"]
+[ext_resource type="PackedScene" uid="uid://dnyk4qoqbx3r7" path="res://Character/Scenes/Enemies/projectile.tscn" id="3_hsbks"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_flying"]
+radius = 6.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fly_0"]
+atlas = ExtResource("3_fly")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fly_1"]
+atlas = ExtResource("3_fly")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fly_2"]
+atlas = ExtResource("3_fly")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fly_3"]
+atlas = ExtResource("3_fly")
+region = Rect2(48, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_flying"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fly_0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fly_1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fly_2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fly_3")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fly_0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fly_1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fly_2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fly_3")
+}],
+"loop": true,
+"name": &"run",
+"speed": 5.0
+}]
+
+[node name="FlyingCreature" instance=ExtResource("1_enemy")]
+collision_layer = 4
+collision_mask = 5
+script = ExtResource("2_flying")
+patrol_range = 120.0
+patrol_speed = 60.0
+attack_range = 150.0
+attack_cooldown = 2.0
+preferred_distance = 100.0
+projectile_scene = ExtResource("3_hsbks")
+
+[node name="CollisionShape2D" parent="." index="1"]
+shape = SubResource("CircleShape2D_flying")
+
+[node name="AnimatedSprite2D" parent="." index="2"]
+texture_filter = 1
+sprite_frames = SubResource("SpriteFrames_flying")
+animation = &"idle"
+autoplay = "idle"

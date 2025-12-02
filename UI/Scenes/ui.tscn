@@ -1,0 +1,74 @@
+[gd_scene load_steps=6 format=3 uid="uid://b5w3tspeaqsnc"]
+
+[ext_resource type="Script" uid="uid://d32blgecv1gfr" path="res://UI/Scripts/ui.gd" id="1_ui"]
+[ext_resource type="Texture2D" uid="uid://bcajo51yp12h0" path="res://Asset/v1.1 dungeon crawler 16X16 pixel pack/ui (new)/pause_button.png" id="5_pause_btn"]
+[ext_resource type="Texture2D" uid="uid://drr6vylg8jqry" path="res://Asset/v1.1 dungeon crawler 16X16 pixel pack/ui (new)/menu_button.png" id="6_menu_btn"]
+[ext_resource type="Texture2D" uid="uid://b08ucvqlmlhh4" path="res://Asset/v1.1 dungeon crawler 16X16 pixel pack/ui (new)/pause_button_press.png" id="7_pause_press"]
+[ext_resource type="Texture2D" uid="uid://b40xuu3lbp7gu" path="res://Asset/v1.1 dungeon crawler 16X16 pixel pack/ui (new)/menu_button_press.png" id="8_menu_press"]
+
+[node name="UI" type="CanvasLayer"]
+script = ExtResource("1_ui")
+
+[node name="HUD" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HUD"]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 88.0
+offset_bottom = 24.0
+theme_override_constants/separation = 0
+
+[node name="TopBar" type="Control" parent="HUD"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -130.0
+offset_top = 15.0
+offset_right = -15.0
+offset_bottom = 55.0
+grow_horizontal = 0
+grow_vertical = 0
+
+[node name="PauseButton" type="TextureButton" parent="HUD/TopBar"]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -50.0
+offset_top = -40.0
+offset_right = -15.0
+grow_horizontal = 0
+grow_vertical = 0
+texture_normal = ExtResource("5_pause_btn")
+texture_pressed = ExtResource("7_pause_press")
+stretch_mode = 5
+
+[node name="MenuButton" type="TextureButton" parent="HUD/TopBar"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -90.0
+offset_top = -40.0
+offset_right = -55.0
+grow_horizontal = 0
+grow_vertical = 0
+texture_normal = ExtResource("6_menu_btn")
+texture_pressed = ExtResource("8_menu_press")
+stretch_mode = 5

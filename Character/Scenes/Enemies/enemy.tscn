@@ -1,0 +1,18 @@
+[gd_scene load_steps=5 format=3 uid="uid://b8x7k2nan4p5q"]
+
+[ext_resource type="PackedScene" uid="uid://cetsainc22urt" path="res://Character/Scenes/character.tscn" id="1_character"]
+[ext_resource type="Script" uid="uid://srd25e6ja8gs" path="res://Character/Scripts/Enemies/enemy.gd" id="2_enemy"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_enemy"]
+radius = 6.0
+
+[node name="Enemy" instance=ExtResource("1_character")]
+script = ExtResource("2_enemy")
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="." index="0"]
+path_desired_distance = 4.0
+target_desired_distance = 4.0
+path_max_distance = 3.5
+
+[node name="CollisionShape2D" parent="." index="1"]
+shape = SubResource("CircleShape2D_enemy")
