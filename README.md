@@ -7,9 +7,14 @@ A roguelike dungeon crawler game built with Godot 4.5. Features procedurally gen
 - **Procedural Dungeon Generation**: Dynamically generated dungeons with connected rooms
 - **Room System**: Multiple room types including spawn rooms, intermediate rooms, special rooms, and end rooms
 - **Enemy Combat**: Fight against various enemies (slimes, goblins, flying creatures)
+- **Pickup System**: Collect potions and items that spawn when rooms are cleared
+  - Health Potions: Restore health
+  - Speed Potions: Temporarily increase movement speed
+  - Incivility Potions: Deal damage (poison effect)
 - **Knockback System**: Dynamic knockback mechanics for both player and enemies when taking damage
 - **State Machine**: Character movement and combat using a state machine pattern
 - **Navigation System**: Automatic navigation mesh generation for AI pathfinding
+- **Item Data System**: Centralized item definitions for easy expansion
 
 ## Requirements
 
@@ -41,6 +46,8 @@ cd godot-rougelike
 Rougelike godot4/
 ├── Asset/                          # Game assets (sprites, tilesets, fonts)
 │   └── v1.1 dungeon crawler 16X16 pixel pack/
+├── Data/                           # Game data and configuration
+│   └── item_data.gd                # Centralized item definitions (potions, effects)
 ├── Character/                      # Player and enemy characters
 │   ├── Scenes/                     # Character scene files
 │   │   ├── character.tscn          # Base character scene
@@ -69,11 +76,13 @@ Rougelike godot4/
 │   ├── Scenes/                     # Room scene files
 │   │   ├── Room.tscn               # Base room scene
 │   │   ├── Door.tscn               # Door scene
+│   │   ├── PickupItem.tscn         # Pickup item scene
 │   │   ├── Spawn_Room_A.tscn       # Spawn room variant A
 │   │   └── Spawn_Room_B.tscn       # Spawn room variant B
 │   └── Scripts/                    # Room scripts
 │       ├── rooms.gd                # Main room generation script
 │       ├── room.gd                 # Base room class
+│       ├── PickupItem.gd           # Pickup item logic and effects
 │       ├── Spawn_room.gd           # Spawn room implementation
 │       └── door.gd                 # Door mechanics
 ├── UI/                             # User interface
@@ -119,6 +128,16 @@ Rougelike godot4/
 - Health and invincibility system
 - Knockback when hit by player
 
+### Pickup System (`Rooms/Scripts/PickupItem.gd`)
+- Pickup item spawning and collection
+- Potion effects (heal, speed boost, damage)
+- Automatic spawning when rooms are cleared
+
+### Item Data System (`Data/item_data.gd`)
+- Centralized item definitions
+- Potion textures and effects configuration
+- Easy to extend with new items
+
 ## Controls
 
 - **Arrow Keys / WASD**: Move character
@@ -149,6 +168,16 @@ Rooms are procedurally generated with proper navigation meshes for enemy pathfin
 - **Invincibility Frames**: Brief invincibility after taking damage with visual feedback
 - **Enemy AI**: Enemies use navigation system to chase the player
 
+## Pickup System
+
+When you clear a room (defeat all enemies), pickups automatically spawn at designated marker positions:
+
+- **Health Potion** (Red): Restores 30 HP
+- **Speed Potion** (Yellow): Increases movement speed by 1.5x for 10 seconds
+- **Incivility Potion** (Green): Deals 20 damage (poison/toxic effect)
+
+Pickups are spawned randomly (1-3 per cleared room) and can be collected by walking over them.
+
 ## Development
 
 ### Testing
@@ -167,6 +196,20 @@ Rooms are procedurally generated with proper navigation meshes for enemy pathfin
 1. Create a new enemy scene in `Character/Scenes/Enemies/`
 2. Create a new enemy script in `Character/Scripts/Enemies/` that extends `Enemy`
 3. Add the enemy scene to the `ENEMY_SCENES` array in `Rooms/Scripts/room.gd`
+
+### Adding New Pickup Items
+1. Add the item texture to `Data/item_data.gd` in the `PICKUP_TEXTURES` dictionary
+2. Define the item's effect in the `PICKUP_EFFECTS` dictionary
+3. Add pickup spawn markers to room scenes in the `PickupPosition` container
+4. The pickup will automatically spawn when rooms are cleared
+
+### Customizing Pickup Effects
+Edit `Data/item_data.gd` to modify:
+- Potion textures
+- Heal amounts
+- Speed boost multipliers and durations
+- Damage values
+- Add new effect types (damage boost, defense, etc.)
 
 ## Assets
 

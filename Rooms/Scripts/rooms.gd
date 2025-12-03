@@ -18,7 +18,7 @@ const RIGHT_WALL_TILE := Vector2i(3, 5)
 const LEFT_WALL_TILE := Vector2i(4, 5)
 
 # ---------- EXPORTS ----------
-@export var num_levels: int = 2
+@export var num_levels: int = 3
 
 # ---------- NODE REFERENCES ----------
 @onready var player: CharacterBody2D = get_tree().get_first_node_in_group("player") as CharacterBody2D

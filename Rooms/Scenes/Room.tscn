@@ -35,14 +35,18 @@ tile_map_data = PackedByteArray("AAAMAAEAAgADAAAAAAAOAAEAAgADAAAAAAANAAEAAgAEAAE
 tile_set = ExtResource("3_1f0yi")
 
 [node name="Entrance" type="Node2D" parent="."]
+visible = false
 
 [node name="Marker2D" type="Marker2D" parent="Entrance"]
+visible = false
 position = Vector2(168, 152)
 
 [node name="Marker2D2" type="Marker2D" parent="Entrance"]
+visible = false
 position = Vector2(185, 152)
 
 [node name="Door" type="Node2D" parent="."]
+visible = false
 
 [node name="Door" parent="Door" instance=ExtResource("4_1f0yi")]
 position = Vector2(96, 16)
@@ -58,7 +62,19 @@ position = Vector2(250, 45)
 [node name="Marker2D3" type="Marker2D" parent="EnemiesPosition"]
 position = Vector2(245, 112)
 
+[node name="PickupPosition" type="Node2D" parent="."]
+
+[node name="Marker2D" type="Marker2D" parent="PickupPosition"]
+position = Vector2(120, 80)
+
+[node name="Marker2D2" type="Marker2D" parent="PickupPosition"]
+position = Vector2(200, 100)
+
+[node name="Marker2D3" type="Marker2D" parent="PickupPosition"]
+position = Vector2(80, 120)
+
 [node name="PlayerDetector" type="Area2D" parent="."]
+visible = false
 collision_mask = 2
 monitorable = false
 

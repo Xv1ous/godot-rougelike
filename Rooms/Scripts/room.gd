@@ -9,6 +9,11 @@ const ENEMY_SCENES := {
 	"fly": preload("res://Character/Scenes/Enemies/flying_creature.tscn")
 }
 
+# Use centralized item data to avoid duplication
+const ItemDataResource = preload("res://Data/item_data.gd")
+const PICKUP_ITEMS = ItemDataResource.PICKUP_TEXTURES
+
+const PICKUP_SCENE := preload("res://Rooms/Scenes/PickupItem.tscn")
 # ---------- EXPORTS ----------
 @export var num_enemies: int
 
@@ -24,9 +29,11 @@ var _room_activated := false
 
 # ---------- NODE REFERENCES ----------
 @onready var wall_layer: TileMapLayer = $NavigationRegion2D/Wall
+@onready var ground_layer: TileMapLayer = $NavigationRegion2D/Ground
 @onready var entrance: Node2D = $Entrance
 @onready var door_container: Node2D = $Door
 @onready var enemies_pos_container: Node2D = $EnemiesPosition
+@onready var pickup_pos_container: Node2D = $PickupPosition
 @onready var player_detector: Area2D = $PlayerDetector
 
 # ---------- LIFECYCLE ----------
@@ -97,9 +104,12 @@ func _add_enemy_to_room(enemy: CharacterBody2D, marker_node: Node2D) -> void:
 
 func _on_enemy_killed() -> void:
 	num_enemies -= 1
+	print("Enemy killed! Remaining enemies: ", num_enemies)
 	if num_enemies <= 0:
+		print("All enemies defeated! Opening door and spawning pickups...")
 		_open_door()
 		_open_entrance()
+		_spawn_pickups()
 
 
 func _open_door() -> void:
@@ -127,3 +137,82 @@ func _on_player_detector_body_entered(body: Node2D) -> void:
 	_room_activated = true
 	close_entrance = true
 	_spawn_enemies()
+
+# ---------- PICKUP SPAWNING ----------
+func _spawn_pickups() -> void:
+	print("=== _spawn_pickups() called ===")
+
+	if Engine.is_editor_hint():
+		print("In editor, skipping pickup spawn")
+		return
+
+	print("pickup_pos_container: ", pickup_pos_container)
+	if not pickup_pos_container:
+		print("ERROR: PickupPosition container not found, cannot spawn pickups")
+		return
+
+	var pickup_markers = pickup_pos_container.get_children()
+	print("Found ", pickup_markers.size(), " pickup markers")
+
+	if pickup_markers.is_empty():
+		print("ERROR: No pickup markers found in PickupPosition container")
+		return
+
+	# Spawn 1-3 random pickups (or up to available markers)
+	var num_pickups = min(randi_range(1, 3), pickup_markers.size())
+	var pickup_keys = PICKUP_ITEMS.keys()
+	print("Will spawn ", num_pickups, " pickups from ", pickup_keys.size(), " item types")
+
+	# Shuffle markers to randomize which ones are used
+	var shuffled_markers = pickup_markers.duplicate()
+	shuffled_markers.shuffle()
+
+	for i in num_pickups:
+		if i >= shuffled_markers.size():
+			print("Breaking: i (", i, ") >= shuffled_markers.size() (", shuffled_markers.size(), ")")
+			break
+
+		var marker = shuffled_markers[i]
+		print("Processing marker ", i, ": ", marker)
+
+		if not marker or not is_instance_valid(marker):
+			print("Marker ", i, " is invalid, skipping")
+			continue
+
+		var random_item_key = pickup_keys[randi() % pickup_keys.size()]
+		var spawn_position = marker.global_position
+		print("Spawning ", random_item_key, " at position: ", spawn_position)
+
+		spawn_pickup(random_item_key, spawn_position)
+
+	print("=== Finished spawning pickups ===")
+
+func spawn_pickup(item_name: String, spawn_pos: Vector2) -> void:
+	print("spawn_pickup() called with item: ", item_name, " at pos: ", spawn_pos)
+
+	if not item_name in PICKUP_ITEMS:
+		push_error("Unknown pickup item: ", item_name)
+		return
+
+	if not PICKUP_SCENE:
+		push_error("PICKUP_SCENE is null!")
+		return
+
+	var pickup = PICKUP_SCENE.instantiate()
+	if not pickup:
+		push_error("Failed to instantiate pickup scene!")
+		return
+
+	pickup.item_type = item_name
+
+	# Add to tree first, then set position (similar to enemy spawning)
+	add_child(pickup)
+
+	# Use call_deferred to set position after node is fully in tree
+	call_deferred("_set_pickup_position", pickup, spawn_pos)
+	print("Added pickup to scene tree, will set position to: ", spawn_pos)
+
+func _set_pickup_position(pickup: PickupItem, spawn_pos: Vector2) -> void:
+	if pickup and is_instance_valid(pickup):
+		pickup.global_position = spawn_pos
+		print("Set pickup global_position to: ", pickup.global_position)
