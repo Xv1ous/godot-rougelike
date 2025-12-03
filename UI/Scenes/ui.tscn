@@ -1,10 +1,16 @@
-[gd_scene load_steps=6 format=3 uid="uid://b5w3tspeaqsnc"]
+[gd_scene load_steps=8 format=3 uid="uid://b5w3tspeaqsnc"]
 
 [ext_resource type="Script" uid="uid://d32blgecv1gfr" path="res://UI/Scripts/ui.gd" id="1_ui"]
 [ext_resource type="Texture2D" uid="uid://bcajo51yp12h0" path="res://Asset/v1.1 dungeon crawler 16X16 pixel pack/ui (new)/pause_button.png" id="5_pause_btn"]
 [ext_resource type="Texture2D" uid="uid://drr6vylg8jqry" path="res://Asset/v1.1 dungeon crawler 16X16 pixel pack/ui (new)/menu_button.png" id="6_menu_btn"]
 [ext_resource type="Texture2D" uid="uid://b08ucvqlmlhh4" path="res://Asset/v1.1 dungeon crawler 16X16 pixel pack/ui (new)/pause_button_press.png" id="7_pause_press"]
 [ext_resource type="Texture2D" uid="uid://b40xuu3lbp7gu" path="res://Asset/v1.1 dungeon crawler 16X16 pixel pack/ui (new)/menu_button_press.png" id="8_menu_press"]
+
+[sub_resource type="Shader" id="Shader_pause_blur"]
+code = "shader_type canvas_item;\n\nuniform sampler2D SCREEN_TEXTURE : hint_screen_texture, filter_linear_mipmap;\n\nvoid fragment() {\n\tvec4 sum = vec4(0.0);\n\t// Fixed small blur size so we don't depend on viewport size\n\tfloat blur_size = 0.003;\n\n\tsum += texture(SCREEN_TEXTURE, SCREEN_UV + vec2(-4.0 * blur_size, 0.0));\n\tsum += texture(SCREEN_TEXTURE, SCREEN_UV + vec2(-2.0 * blur_size, 0.0));\n\tsum += texture(SCREEN_TEXTURE, SCREEN_UV);\n\tsum += texture(SCREEN_TEXTURE, SCREEN_UV + vec2(2.0 * blur_size, 0.0));\n\tsum += texture(SCREEN_TEXTURE, SCREEN_UV + vec2(4.0 * blur_size, 0.0));\n\n\tsum /= 5.0;\n\n\t// Darken the blurred background a bit\n\tCOLOR = vec4(sum.rgb * 0.4, 1.0);\n}\n"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_pause_blur"]
+shader = SubResource("Shader_pause_blur")
 
 [node name="UI" type="CanvasLayer"]
 script = ExtResource("1_ui")
@@ -72,3 +78,167 @@ grow_vertical = 0
 texture_normal = ExtResource("6_menu_btn")
 texture_pressed = ExtResource("8_menu_press")
 stretch_mode = 5
+
+[node name="DefeatLabel" type="Label" parent="HUD"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -60.0
+offset_top = -10.0
+offset_right = 60.0
+offset_bottom = 10.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "YOU DIED"
+horizontal_alignment = 1
+vertical_alignment = 1
+visible = false
+
+[node name="RetryButton" type="TextureButton" parent="HUD"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -40.0
+offset_top = 20.0
+offset_right = 40.0
+offset_bottom = 50.0
+grow_horizontal = 2
+grow_vertical = 2
+texture_normal = ExtResource("6_menu_btn")
+texture_pressed = ExtResource("8_menu_press")
+stretch_mode = 5
+visible = false
+
+[node name="RetryLabel" type="Label" parent="HUD/RetryButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "RETRY"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="DefeatMenuButton" type="TextureButton" parent="HUD"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -40.0
+offset_top = 55.0
+offset_right = 40.0
+offset_bottom = 85.0
+grow_horizontal = 2
+grow_vertical = 2
+texture_normal = ExtResource("6_menu_btn")
+texture_pressed = ExtResource("8_menu_press")
+stretch_mode = 5
+visible = false
+
+[node name="DefeatMenuLabel" type="Label" parent="HUD/DefeatMenuButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "MAIN MENU"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PauseMenu" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 1
+visible = false
+
+[node name="BlurBG" type="TextureRect" parent="PauseMenu"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+material = SubResource("ShaderMaterial_pause_blur")
+stretch_mode = 6
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PauseMenu"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -50.0
+offset_top = -60.0
+offset_right = 50.0
+offset_bottom = 40.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 20
+
+[node name="ResumeButton" type="TextureButton" parent="PauseMenu/VBoxContainer"]
+layout_mode = 2
+texture_normal = ExtResource("6_menu_btn")
+texture_pressed = ExtResource("8_menu_press")
+stretch_mode = 5
+
+[node name="ResumeLabel" type="Label" parent="PauseMenu/VBoxContainer/ResumeButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "RESUME"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PauseMenuButton" type="TextureButton" parent="PauseMenu/VBoxContainer"]
+layout_mode = 2
+texture_normal = ExtResource("6_menu_btn")
+texture_pressed = ExtResource("8_menu_press")
+stretch_mode = 5
+
+[node name="PauseMenuLabel" type="Label" parent="PauseMenu/VBoxContainer/PauseMenuButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "MAIN MENU"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="FadeLayer" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+visible = false
+
+[node name="FadeRect" type="ColorRect" parent="FadeLayer"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0)

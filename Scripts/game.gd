@@ -13,6 +13,15 @@ func _ready() -> void:
 	await get_tree().process_frame # Extra frame for room generation
 	setup_navigation_for_all_rooms()
 
+func reload_navigation_for_new_floor() -> void:
+	if not is_inside_tree():
+		return
+
+	# Wait a couple of frames for new rooms to be added
+	await get_tree().process_frame
+	await get_tree().process_frame
+	setup_navigation_for_all_rooms()
+
 # ---------- NAVIGATION SETUP ----------
 func setup_navigation_for_all_rooms() -> void:
 	if not rooms_node:

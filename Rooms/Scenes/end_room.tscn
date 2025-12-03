@@ -1,6 +1,7 @@
-[gd_scene load_steps=5 format=4 uid="uid://cse688h0o823w"]
+[gd_scene load_steps=6 format=4 uid="uid://cse688h0o823w"]
 
 [ext_resource type="PackedScene" uid="uid://bp06ptfrf8kq5" path="res://Rooms/Scenes/Room.tscn" id="1_l62t1"]
+[ext_resource type="Script" uid="uid://d5agm8mxjnqo" path="res://Rooms/Scripts/end_room.gd" id="2_isqbk"]
 [ext_resource type="Texture2D" uid="uid://duf1ej0bpwsjq" path="res://Asset/v1.1 dungeon crawler 16X16 pixel pack/full tilemap.png" id="2_pi1ne"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_isqbk"]
@@ -126,6 +127,8 @@ navigation_layer_0/layers = 1
 sources/2 = SubResource("TileSetAtlasSource_isqbk")
 
 [node name="EndRoom" instance=ExtResource("1_l62t1")]
+script = ExtResource("2_isqbk")
+num_enemies = 0
 
 [node name="Wall" parent="NavigationRegion2D" index="0"]
 tile_map_data = PackedByteArray("AAAKAAAAAgADAAQAAAAJAAAAAgABAAcAAAAIAAAAAgAHAAUAAAAHAAAAAgAIAAQAAAADAAEAAgAFAAcAAAAKAAEAAgABAAcAAAAEAAAAAgAFAAcAAAADAAAAAgAEAAQAAAAEAAQAAgACAAcAAAAFAAQAAgACAAcAAAAJAAQAAgACAAcAAAAIAAQAAgACAAcAAAAKAAQAAgAFAAcAAAADAAQAAgABAAcAAAAKAAMAAgAEAAUAAAAKAAIAAgAEAAUAAAADAAMAAgADAAUAAAADAAIAAgADAAUAAAAFAAAAAgAGAAUAAAAGAAAAAgAHAAQAAAAEAP//AgAEAAQAAAAJAP//AgADAAQAAAAFAP//AgACAAcAAAAGAP//AgACAAcAAAAHAP//AgACAAcAAAAIAP//AgACAAcAAAA=")

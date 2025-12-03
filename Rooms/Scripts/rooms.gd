@@ -18,22 +18,13 @@ const RIGHT_WALL_TILE := Vector2i(3, 5)
 const LEFT_WALL_TILE := Vector2i(4, 5)
 
 # ---------- EXPORTS ----------
-@export var num_levels: int = 5
-
-# ---------- VARIABLES ----------
-# Simple SavedData alternative - you can replace this with your actual SavedData
-var num_floor: int = 2
+@export var num_levels: int = 2
 
 # ---------- NODE REFERENCES ----------
 @onready var player: CharacterBody2D = get_tree().get_first_node_in_group("player") as CharacterBody2D
 
 # ---------- LIFECYCLE ----------
 func _ready() -> void:
-	num_floor += 1
-
-	if num_floor == 3:
-		num_levels = 3
-
 	_spawn_rooms()
 
 # ---------- ROOM GENERATION ----------
